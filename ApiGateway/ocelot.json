@@ -1,0 +1,119 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "auth"
+    },
+    {
+      "DownstreamPathTemplate": "/api/enrollments/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "enrollment-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/enrollments/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "enrollments"
+    },
+    {
+      "DownstreamPathTemplate": "/api/payments/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "payment-webhook-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/payments/{everything}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "payments"
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/swagger/auth/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "enrollment-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/swagger/enrollments/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "payment-webhook-service",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/swagger/payments/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "auth",
+      "Config": [
+        {
+          "Name": "Auth Service API",
+          "Version": "v1",
+          "Url": "http://auth-service/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "enrollments",
+      "Config": [
+        {
+          "Name": "Enrollment Service API",
+          "Version": "v1",
+          "Url": "http://enrollment-service/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "payments",
+      "Config": [
+        {
+          "Name": "Payment Webhook Service API",
+          "Version": "v1",
+          "Url": "http://payment-webhook-service/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000",
+    "RequestIdKey": "OcRequestId"
+  }
+}

@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # Database Initializer
+  db-init:
+    image: alpine:latest
+    container_name: db-init
+    entrypoint: /bin/sh
+    user: root  # Usar root para dar permisos
+    command:
+      - -c
+      - |
+        echo "Checking database..."
+        if [ ! -f /app/shared/applicationDb.db ]; then
+          echo "Database not found. Copying..."
+          cp /source/applicationDb.db /app/shared/applicationDb.db
+          chmod 666 /app/shared/applicationDb.db
+          echo "Database copied successfully!"
+        else
+          echo "Database already exists. Skipping copy."
+        fi
+        # Dar permisos completos
+        chmod 666 /app/shared/applicationDb.db
+        chmod 777 /app/shared
+        chown 1000:1000 /app/shared/applicationDb.db
+        echo "Permissions set:"
+        ls -lh /app/shared/
+    volumes:
+      - ./database:/source:ro
+      - shared-sqlite-data:/app/shared:rw
+
+  # Auth Service
+  auth-service:
+    build:
+      context: .
+      dockerfile: /AuthService/Application/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80  # Forzar puerto 80
+      - ConnectionStrings__DefaultConnection=Data Source=/app/shared-data/applicationDb.db
+    volumes:
+      - shared-sqlite-data:/app/shared-data
+    networks:
+      - microservices-network
+
+  # Enrollment Service
+  enrollment-service:
+    build:
+      context: .
+      dockerfile: /EnrollmentService/Application/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80  # Forzar puerto 80
+      - ConnectionStrings__DefaultConnection=Data Source=/app/shared-data/applicationDb.db
+    volumes:
+      - shared-sqlite-data:/app/shared-data
+    depends_on:
+      - auth-service
+    networks:
+      - microservices-network
+
+  # Payment Webhook Service
+  payment-webhook-service:
+    build:
+      context: .
+      dockerfile: /PaymentWebhookService/Application/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80  # Forzar puerto 80
+      - ConnectionStrings__DefaultConnection=Data Source=/app/shared-data/applicationDb.db
+    volumes:
+      - shared-sqlite-data:/app/shared-data
+    depends_on:
+      - enrollment-service
+    networks:
+      - microservices-network
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: .
+      dockerfile: /ApiGateway/Dockerfile
+    container_name: api-gateway
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80  # Forzar puerto 80
+    depends_on:
+      - auth-service
+      - enrollment-service
+      - payment-webhook-service
+    networks:
+      - microservices-network
+
+volumes:
+  shared-sqlite-data:
+    driver: local
+
+networks:
+  microservices-network:
+    driver: bridge
