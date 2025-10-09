@@ -43,7 +43,7 @@ jobs:
 
     - name: Run Auth Service Tests
       run: |
-        dotnet /AuthService/Tests/AuthService.UnitTests/AuthService.UnitTests.csproj \
+        dotnet test AuthService/Tests/AuthService.UnitTests/AuthService.UnitTests.csproj \
           --no-build \
           --configuration Release \
           --verbosity normal \
@@ -51,7 +51,7 @@ jobs:
 
     - name: Run Payment Service Tests
       run: |
-        dotnet test /PaymentWebhookService/Tests/PaymentWebhookService.UnitTests/PaymentWebhookService.UnitTests.csproj \
+        dotnet test PaymentWebhookService/Tests/PaymentWebhookService.UnitTests/PaymentWebhookService.UnitTests.csproj \
           --no-build \
           --configuration Release \
           --verbosity normal \
