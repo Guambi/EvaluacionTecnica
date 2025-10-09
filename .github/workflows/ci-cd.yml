@@ -16,6 +16,9 @@ jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
+    permissions:
+          checks: write # Essential for dorny/test-reporter
+          contents: read # Often needed for checking out code
     
     steps:
     - name: Checkout code
