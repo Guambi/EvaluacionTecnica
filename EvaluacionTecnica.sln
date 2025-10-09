@@ -52,6 +52,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
+		ci-cd.yml = ci-cd.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", "{F4AF6978-5804-445C-847D-4E65A0C34CF1}"
@@ -62,6 +63,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{E3
 	ProjectSection(SolutionItems) = preProject
 		Database\applicationDb.db = Database\applicationDb.db
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{7EBE07C7-E649-48A5-8FF3-CE1D847D5EA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnrollmentService.UnitTests", "EnrollmentService\UnitTests\EnrollmentService.UnitTests\EnrollmentService.UnitTests.csproj", "{EF7996D6-2DC6-42D7-A293-E4B337F5FBC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{637EF072-0DC3-42D7-BE81-7763CC77E2E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentWebhookService.UnitTests", "PaymentWebhookService\Tests\PaymentWebhookService.UnitTests\PaymentWebhookService.UnitTests.csproj", "{826D28BC-AF24-4277-8A93-4E6C5735C545}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{CD39B99E-3F97-4954-A469-FD8BB0A912A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.UnitTests", "AuthService\Tests\AuthService.UnitTests\AuthService.UnitTests.csproj", "{F4A1AB0F-D2A8-4FCE-952B-608C459EB14B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,6 +126,18 @@ Global
 		{37FEE987-2E2E-4E26-B8C3-EE17C6D02140}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37FEE987-2E2E-4E26-B8C3-EE17C6D02140}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37FEE987-2E2E-4E26-B8C3-EE17C6D02140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF7996D6-2DC6-42D7-A293-E4B337F5FBC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF7996D6-2DC6-42D7-A293-E4B337F5FBC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF7996D6-2DC6-42D7-A293-E4B337F5FBC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF7996D6-2DC6-42D7-A293-E4B337F5FBC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{826D28BC-AF24-4277-8A93-4E6C5735C545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826D28BC-AF24-4277-8A93-4E6C5735C545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826D28BC-AF24-4277-8A93-4E6C5735C545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826D28BC-AF24-4277-8A93-4E6C5735C545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A1AB0F-D2A8-4FCE-952B-608C459EB14B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A1AB0F-D2A8-4FCE-952B-608C459EB14B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A1AB0F-D2A8-4FCE-952B-608C459EB14B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A1AB0F-D2A8-4FCE-952B-608C459EB14B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,6 +164,12 @@ Global
 		{28B18585-1420-4803-812A-28115D171C15} = {8245570C-218A-4E58-9B66-35512275C33C}
 		{A5DA4765-350C-41DE-86E5-4BC8E13FDDF6} = {28B18585-1420-4803-812A-28115D171C15}
 		{37FEE987-2E2E-4E26-B8C3-EE17C6D02140} = {F4AF6978-5804-445C-847D-4E65A0C34CF1}
+		{7EBE07C7-E649-48A5-8FF3-CE1D847D5EA8} = {C933F6DF-1C69-49B7-A8E1-40BE6F9EFF9F}
+		{EF7996D6-2DC6-42D7-A293-E4B337F5FBC7} = {7EBE07C7-E649-48A5-8FF3-CE1D847D5EA8}
+		{637EF072-0DC3-42D7-BE81-7763CC77E2E6} = {8245570C-218A-4E58-9B66-35512275C33C}
+		{826D28BC-AF24-4277-8A93-4E6C5735C545} = {637EF072-0DC3-42D7-BE81-7763CC77E2E6}
+		{CD39B99E-3F97-4954-A469-FD8BB0A912A7} = {324CCC51-B30C-4512-B3B3-A0D79B19D425}
+		{F4A1AB0F-D2A8-4FCE-952B-608C459EB14B} = {CD39B99E-3F97-4954-A469-FD8BB0A912A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E7DEF22-4BA0-486D-8EBF-DC4C2FD8636E}
