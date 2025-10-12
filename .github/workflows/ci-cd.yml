@@ -53,7 +53,8 @@ jobs:
           --no-build \
           --configuration Release \
           --verbosity normal \
-          --logger "trx;LogFileName=auth-test-results.trx"
+          --logger "trx;LogFileName=auth-test-results.trx" \
+          --collect:"XPlat Code Coverage"
 
     - name: Run Payment Service Tests
       run: |
@@ -61,7 +62,7 @@ jobs:
           --no-build \
           --configuration Release \
           --verbosity normal \
-          --logger "trx;LogFileName=payment-test-results.trx"
+          --logger "trx;LogFileName=payment-test-results.trx" \
           --collect:"XPlat Code Coverage"
 
     - name: Publish Test Results
