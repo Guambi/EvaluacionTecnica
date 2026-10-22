@@ -1,31 +1,31 @@
-# ??? Enrollment Microservices - Sistema de Inscripciones y Pagos
+# Enrollment Microservices - Sistema de Inscripciones y Pagos
 
 [![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)](https://www.docker.com/)
 [![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite)](https://www.sqlite.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Sistema distribuido de microservicios para gestión de inscripciones con procesamiento de pagos mediante webhook idempotente.
+Sistema distribuido de microservicios para gesti贸n de inscripciones con procesamiento de pagos mediante webhook idempotente.
 
 ---
 
-## ??? Arquitectura de Microservicios
+## Arquitectura de Microservicios
 
-El sistema está dividido en **4 microservicios independientes**:
+El sistema est篓垄 dividido en **4 microservicios independientes**:
 
 ---
 
-## ?? Por qué Microservicios
+## Por qu茅 Microservicios
 
-### Decisión Arquitectónica
+### Decisi贸n Arquitect贸nica
 
-Se optó por una **arquitectura de microservicios** en lugar de un monolito por las siguientes razones:
+Se opt贸 por una **arquitectura de microservicios** en lugar de un monolito por las siguientes razones:
 
-#### ? Ventajas Implementadas
+#### Ventajas Implementadas
 
-1. **Separación de Responsabilidades (SRP)**
-   - Cada servicio tiene una única responsabilidad bien definida
-   - **Auth Service**: Solo maneja autenticación/autorización
+1. **Separaci贸n de Responsabilidades (SRP)**
+   - Cada servicio tiene una 煤nica responsabilidad bien definida
+   - **Auth Service**: Solo maneja autenticaci贸n/autorizaci贸n
    - **Enrollment Service**: Solo gestiona inscripciones
    - **Payment Webhook**: Solo procesa notificaciones de pago
 
@@ -35,7 +35,7 @@ Se optó por una **arquitectura de microservicios** en lugar de un monolito por 
    ```bash
    docker-compose up -d --scale enrollment-service=3
    ```
-   2.2. Cada microservicio puede escalar según su carga específica
+   2.2. Cada microservicio puede escalar seg煤n su carga espec谩fica
    2.3. No desperdicias recursos escalando funcionalidades que no lo necesitan
 
 3. **Despliegue Independiente**
@@ -46,26 +46,26 @@ Se optó por una **arquitectura de microservicios** en lugar de un monolito por 
 4. **Aislamiento de Fallos**
    - Si el servicio de pagos falla, las inscripciones siguen funcionando
    - Resilencia mejorada del sistema completo
-   - Implementación de Circuit Breakers más efectiva
+   - Implementaci贸n de Circuit Breakers m谩s efectiva
 
-5. **Flexibilidad Tecnológica**
-   - Cada servicio puede usar tecnologías diferentes si es necesario
-   - En el futuro, podrías migrar un servicio a otro lenguaje sin afectar a los demás
-   - Facilita adopción de nuevas tecnologías gradualmente
+5. **Flexibilidad Tecnol贸gica**
+   - Cada servicio puede usar tecnolog铆as diferentes si es necesario
+   - En el futuro, podr铆as migrar un servicio a otro lenguaje sin afectar a los dem谩s
+   - Facilita adopci贸n de nuevas tecnolog篓陋as gradualmente
 
-6. **Equipos Autónomos**
+6. **Equipos Aut贸nomos**
    - Diferentes equipos pueden trabajar en diferentes servicios
    - Menos conflictos en Git
-   - Ciclos de desarrollo más rápidos
+   - Ciclos de desarrollo m谩s r谩pidos
 
 7. **Seguridad Mejorada**
-   - El webhook tiene autenticación diferente (API Key)
+   - El webhook tiene autenticaci贸n diferente (API Key)
    - Los servicios internos usan JWT
-   - Separación de preocupaciones de seguridad
+   - Separaci贸n de preocupaciones de seguridad
 
-#### ?? Comparación: Monolito vs Microservicios
+#### Comparaci贸n: Monolito vs Microservicios
 
-| Aspecto | Monolito | Microservicios | ?Por qué ganó? |
+| Aspecto | Monolito | Microservicios | 驴Por qu茅 gan贸? |
 |---------|----------|----------------|----------------|
 | **Despliegue** | Todo o nada | Independiente por servicio | ? Menos riesgo |
 | **Escalabilidad** | Escala todo | Escala solo lo necesario | ? Eficiencia de recursos |
@@ -73,15 +73,15 @@ Se optó por una **arquitectura de microservicios** en lugar de un monolito por 
 | **Desarrollo** | Equipos bloqueados | Equipos independientes | ? Velocidad |
 | **Complejidad** | Simple al inicio | Mayor complejidad inicial | ?? Trade-off aceptado |
 
-## ?? Por qué .NET 8
+## Por qu茅 .NET 8
 
-### Decisión de Tecnología
+### Decisi贸n de Tecnolog篓陋a
 
-Se selección **.NET 8 (LTS)** por los siguientes motivos:
+Se selecci贸n **.NET 8 (LTS)** por los siguientes motivos:
 
-- **Rendimiento mejorado:** .NET 8 ofrece mejoras significativas en el rendimiento de APIs, Entity Framework Core y serialización JSON.
+- **Rendimiento mejorado:** .NET 8 ofrece mejoras significativas en el rendimiento de APIs, Entity Framework Core y serializaci贸n JSON.
 - **Soporte a largo plazo (LTS):** Garantiza estabilidad y soporte extendido por parte de Microsoft.
-- **Integración nativa con contenedores:** Soporte optimizado para Docker y Kubernetes, simplificando despliegues.
+- **Integraci贸n nativa con contenedores:** Soporte optimizado para Docker y Kubernetes, simplificando despliegues.
 - **Minimal APIs y mejoras en C# 12:** Facilita el desarrollo de servicios ligeros y de alto rendimiento.
 - **Compatibilidad multiplataforma:** Permite ejecutar los servicios en Linux, Windows o macOS sin modificaciones.
 
@@ -91,7 +91,7 @@ Se selección **.NET 8 (LTS)** por los siguientes motivos:
 
 ```
 ApiGateway/              # Puerta de entrada que enruta las peticiones
-AuthService/      #Microservicio de simulación de Token JWT
+AuthService/      #Microservicio de simulaci贸n de Token JWT
     /AuthService.Api 
     /AuthService.Business
 EnrollmentsService/      #Microservicio de enrolamiento
@@ -104,7 +104,7 @@ PaymentWebhookService/      #Microservicio de pagos
     /PaymentWebhookService.Business
     /PaymentWebhookService.Data
     /PaymentWebhookService.Infraestructura
-docker-compose.yml          # Orquestación de los microservicios
+docker-compose.yml          # Orquestaci篓庐n de los microservicios
 README.md
 ```
 
@@ -112,7 +112,7 @@ README.md
 
 ## Requisitos Previos
 
-Antes de comenzar, asegúrate de tener instalado:
+Antes de comenzar, aseg煤rate de tener instalado:
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)  
 - [Git](https://git-scm.com/)  
@@ -154,7 +154,7 @@ docker compose up -d
 
 ### 4 Verificar el estado
 
-Puedes listar los contenedores en ejecución con:
+Puedes listar los contenedores en ejecuci贸n con:
 
 ```bash
 docker ps
@@ -166,14 +166,14 @@ docker ps
 
 ---
 
-## Comandos útiles
+## Comandos 煤tiles
 
 - **Detener los servicios:**
   ```bash
   docker compose down
   ```
 
-- **Reconstruir y reiniciar (si cambiaste código):**
+- **Reconstruir y reiniciar (si cambiaste c贸digo):**
   ```bash
   docker compose up --build
   ```
@@ -185,7 +185,7 @@ docker ps
 
 ---
 
-## Tecnologías Utilizadas
+## Tecnolog铆as Utilizadas
 
 - **.NET 8 Web API**
 - **Entity Framework Core 8**
